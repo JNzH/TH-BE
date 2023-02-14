@@ -3,20 +3,20 @@ const router = express.Router()
 
 const dbcontroller = require('../controller/dbcontroller')
 
-router.get("/bill", (req, res) => {
-    res.send(dbcontroller.dbShowAllBill())
+router.get("/bill", async (req, res) => {
+    res.send(await dbcontroller.dbShowAllBill())
     console.log(`Show all bills`)
 })
 
-router.post("/bill", (req, res) => {
-    const result = dbcontroller.dbInsertBill(req.body)
+router.post("/bill", async (req, res) => {
+    const result = await dbcontroller.dbInsertBill(req.body)
     res.status(result.status)
     if (result.status == 200) {
-        res.send("Insert successful")
+        res.send("Insert bill successful")
         console.log(`Insert ${JSON.stringify(req.body)}`)
     } else {
-        res.send(result.errors)
-        console.log(`Insert error`)
+        res.send(`Insert bill failed: ${result.errors}`)
+        console.log(`Insert bill failed: ${result.errors}`)
     }
 })
 

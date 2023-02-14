@@ -4,7 +4,7 @@ const validateBill = require('../models/bill').validateBill
 let data = require('../database/db.json')
 
 module.exports = {
-    dbInsertBill: function(bill) {
+    dbInsertBill: async function(bill) {
         var errors = validateBill(bill)
         if (errors.length == 0) {
             data.push(bill)
@@ -18,7 +18,7 @@ module.exports = {
             }
         }
     },
-    dbShowAllBill: function() {
+    dbShowAllBill: async function() {
         return JSON.stringify(data)
     }
 };
